@@ -1,31 +1,51 @@
 import React from 'react';
 
-const Weather = props =>
-    (
+class Weather extends React.Component {
+
+  convertToUs = (temperature) => {
+    let usTemp = (temperature * 2) +30
+    return this.round(usTemp)
+  }
+
+  round = (number) =>{
+    return Math.round(number)
+  }
+
+
+
+render(){
+
+let ukTemp = this.round(this.props.temperature)
+let usTemp = this.convertToUs(this.props.temperature)
+
+return (
       <div className='weather__info'>
         {
-          props.city && props.country &&  <p className="weather__key">Location:
-          <span className="weather__value"> {props.city}, {props.country}</span>
+          this.props.city && this.props.country &&  <p className="weather__key">Location:
+          <span className="weather__value"> {this.props.city}, {this.props.country}</span>
           </p>
         }
         {
-          props.temperature &&  <p className="weather__key">Temperature:
-          <span className="weather__value"> {props.temperature}</span>
+          this.props.temperature &&  <p className="weather__key">Temperature:
+          <span className="weather__value"> {}
+          {ukTemp}°C / {usTemp}°F</span>
           </p>
         }
         {
-          props.humidity &&  <p className="weather__key">Humidity:
-          <span className="weather__value"> {props.humidity}</span>
+          this.props.humidity &&  <p className="weather__key">Humidity:
+          <span className="weather__value"> {this.props.humidity}%</span>
           </p>
         }
         {
-          props.description &&  <p className="weather__key">Conditions:
-          <span className="weather__value"> {props.description}</span>
+          this.props.description &&  <p className="weather__key capitalise">Conditions:
+          <span className="weather__value"> {this.props.description}</span>
           </p>
         }
         {
-          props.error && <p className="weather__error">{props.error}</p>
+          this.props.error && <p className="weather__error">{this.props.error}</p>
         }
       </div>
   )
+}
+}
 export default Weather
